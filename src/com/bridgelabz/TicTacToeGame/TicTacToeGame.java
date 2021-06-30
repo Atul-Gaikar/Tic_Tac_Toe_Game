@@ -9,7 +9,7 @@ public class TicTacToeGame {
 	}
 
 	public void createBoard() {
-		char[] board = new char[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };// Create a board of char[]of size 10 & assign empty
+		char[] board = new char[] { 10 };// Create a board of char[]of size 10 & assign empty
 																	// space to each element
 
 	}
