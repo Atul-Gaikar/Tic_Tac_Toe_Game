@@ -1,17 +1,23 @@
-package com.bridgelabz.TicTacToeGame;
+package com.bridgelabz;
+
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class TicTacToeGame {
-	public static void main(String args[]) {
-		System.out.println("Welcome to TicTacToe Game");
-		TicTacToeGame p = new TicTacToeGame(); // Create a object.
-		p.createBoard();
+	private static final char empty = ' ';
+	private char[] board;
 
+		TicTacToeGame(){
+		board = new char[10];
+		for(int i = 0;i<board.length; i++) {
+			board[i] = empty;
+		}
 	}
 
-	public void createBoard() {
-		char[] board = new char[] { 10 };// Create a board of char[]of size 10 & assign empty
-																	// space to each element
-
+	public static void main(String[] args) {
+		TicTacToeGame game = new TicTacToeGame();
+		game.TicTacToeGame();
 	}
+}
 
 }
