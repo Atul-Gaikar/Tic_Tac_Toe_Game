@@ -3,7 +3,7 @@ package com.bridgelabz.TicTacToeGame;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class TicTacToeGameUC6 {
+public class TicTacToeGameUC7 {
 	private static final char EMPTY = ' ';
 	private static final char CROSS = 'X';
 	private static final char ROUND = 'O';
@@ -12,7 +12,7 @@ public class TicTacToeGameUC6 {
 	private char computerSymbol;
 	private char[] board;
 
-	TicTacToeGameUC6() {
+	TicTacToeGameUC7() {
 		board = new char[10];
 		Arrays.fill(board, EMPTY);
 
@@ -111,8 +111,37 @@ public class TicTacToeGameUC6 {
 		}
 	}
 
+	public int winningPosition(char symbol) {
+		// horizontal
+		if (board[getIndex(1, 1)] == symbol && board[getIndex(1, 2)] == symbol && board[getIndex(1, 3)] == symbol)
+			return 1;
+		if (board[getIndex(2, 1)] == symbol && board[getIndex(2, 2)] == symbol && board[getIndex(2, 3)] == symbol)
+			return 2;
+		if (board[getIndex(3, 1)] == symbol && board[getIndex(3, 2)] == symbol && board[getIndex(3, 3)] == symbol)
+			return 3;
+
+		// vertical
+		if (board[getIndex(1, 1)] == symbol && board[getIndex(2, 1)] == symbol && board[getIndex(3, 1)] == symbol)
+			return 4;
+		if (board[getIndex(1, 2)] == symbol && board[getIndex(2, 2)] == symbol && board[getIndex(3, 2)] == symbol)
+			return 5;
+		if (board[getIndex(1, 3)] == symbol && board[getIndex(2, 3)] == symbol && board[getIndex(3, 3)] == symbol)
+			return 6;
+
+		// diagonal
+		if (board[getIndex(1, 1)] == symbol && board[getIndex(2, 2)] == symbol && board[getIndex(3, 3)] == symbol)
+			return 7;
+
+		// off diagonal
+		if (board[getIndex(1, 3)] == symbol && board[getIndex(2, 2)] == symbol && board[getIndex(3, 1)] == symbol)
+			return 8;
+
+		return 0;
+
+	}
+
 	public static void main(String[] args) {
-		TicTacToeGameUC6 game = new TicTacToeGameUC6();
+		TicTacToeGameUC7 game = new TicTacToeGameUC7();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Choose a symbol (X or O): ");
 		String symbol = sc.next();
@@ -120,14 +149,11 @@ public class TicTacToeGameUC6 {
 		System.out.println("Player has chosen: " + game.getPlayerSymbol());
 		System.out.println("initial:");
 		game.showBoard();
-		System.out.println("Enter position to move: ");
-		int position = sc.nextInt();
+		game.playerMove(1);
+		game.playerMove(5);
+		game.playerMove(9);
 
-		System.out.println(game.isFree(3));
-		game.isFree(3);
-
-		game.playerMove(3);
-		System.out.println("player moved by " + position);
-		game.toss();
+		System.out.println("Winning Position of player" + game.winningPosition(game.getPlayerSymbol()));
+		sc.close();
 	}
 }
