@@ -3,7 +3,7 @@ package com.bridgelabz.TicTacToeGame;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class TicTacToeGameUC5 {
+public class TicTacToeGameUC6 {
 	private static final char EMPTY = ' ';
 	private static final char CROSS = 'X';
 	private static final char ROUND = 'O';
@@ -12,7 +12,7 @@ public class TicTacToeGameUC5 {
 	private char computerSymbol;
 	private char[] board;
 
-	TicTacToeGameUC5() {
+	TicTacToeGameUC6() {
 		board = new char[10];
 		Arrays.fill(board, EMPTY);
 
@@ -58,7 +58,7 @@ public class TicTacToeGameUC5 {
 		if (row > 3 || row < 1 || col > 3 || col < 1) {
 			System.out.println("Invalid move!");
 			return;
-			
+
 		}
 
 		if (isFree(row, col)) {
@@ -99,8 +99,20 @@ public class TicTacToeGameUC5 {
 		}
 	}
 
+	/**
+	 * Toss to select who plays first
+	 */
+	private void toss() {
+		int tossResult = (int) Math.floor(Math.random() * 10) % 2;
+		if (tossResult == 1)
+			System.out.println("User plays first");
+		else {
+			System.out.println("Computer plays first");
+		}
+	}
+
 	public static void main(String[] args) {
-		TicTacToeGameUC5 game = new TicTacToeGameUC5();
+		TicTacToeGameUC6 game = new TicTacToeGameUC6();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Choose a symbol (X or O): ");
 		String symbol = sc.next();
@@ -112,10 +124,10 @@ public class TicTacToeGameUC5 {
 		int position = sc.nextInt();
 
 		System.out.println(game.isFree(3));
-		// game.isFree(3);
+		game.isFree(3);
 
 		game.playerMove(3);
 		System.out.println("player moved by " + position);
-
+		game.toss();
 	}
 }
