@@ -1,9 +1,10 @@
 package com.bridgelabz.TicTacToeGame;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
-public class TicTacToeGameUC7 {
+public class TicTacToeUC8 {
 	private static final char EMPTY = ' ';
 	private static final char CROSS = 'X';
 	private static final char ROUND = 'O';
@@ -12,10 +13,26 @@ public class TicTacToeGameUC7 {
 	private char computerSymbol;
 	private char[] board;
 
-	TicTacToeGameUC7() {
+	TicTacToeUC8() {
 		board = new char[10];
 		Arrays.fill(board, EMPTY);
 
+	}
+
+	private TicTacToeUC8(char[] board) {
+		this.board = board;
+	}
+
+	public TicTacToeUC8 getCopy() {
+		return new TicTacToeUC8(this.board);
+	}
+
+	public char getComputerSymbol() {
+		return playerSymbol;
+	}
+
+	public char getComputerSymbol1() {
+		return computerSymbol;
 	}
 
 	private static int getIndex(int row, int col) {
@@ -140,20 +157,71 @@ public class TicTacToeGameUC7 {
 
 	}
 
+	public void computerMove() {
+		Random random = new Random();
+		int move = random.nextInt(9) + 1;
+		while (!isFree(move))
+			move = random.nextInt(9) + 1;
+		board[move - 1] = computerSymbol;
+		System.out.println("After computer move");
+		showBoard();
+	}
+
+	public int nextWinnigMovePosition(char[] board, char character) {
+		TicTacToeUC8 temp = this.getCopy();
+
+		temp.choosePlayerSymbol(this.playerSymbol);
+		int winningPosition = -1;
+		for (int position = 1; position <= 9; position++) {
+			if (temp.isFree(position)) {
+				temp.playerMove(position);
+				if (temp.hasPlayerWon()) {
+					winningPosition = temp.winningPosition(this.playerSymbol);
+					break;
+				}
+			}
+		}
+
+		return winningPosition;
+	}
+
+	public boolean hasPlayerWon() {
+		return winningPosition(playerSymbol) != 0;
+	}
+
+	public boolean hasComputerWon() {
+		return winningPosition(computerSymbol) != 0;
+	}
+
 	public static void main(String[] args) {
-		TicTacToeGameUC7 game = new TicTacToeGameUC7();
+		TicTacToeUC8 game = new TicTacToeUC8();
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Choose a symbol (X or O): ");
-		String symbol = sc.next();
-		game.choosePlayerSymbol(symbol.charAt(0));
-		System.out.println("Player has chosen: " + game.getPlayerSymbol());
+		int whoPlaysFirst = game.game();
+		System.out.println("Player symbol is: " + game.getPlayerSymbol());
 		System.out.println("initial:");
 		game.showBoard();
-		game.playerMove(1);
-		game.playerMove(5);
-		game.playerMove(9);
+		if (whoPlaysFirst == 0)
+			game.computerMove();
 
-		System.out.println("Winning Position of player" + game.winningPosition(game.getPlayerSymbol()));
+		while (true) {
+			if (!game.hasComputerWon()) {
+				System.out.print("Enter position to play[1-9]: ");
+				game.playerMove(sc.nextInt());
+			}
+			if (!game.hasPlayerWon())
+				game.computerMove();
+			else
+				break;
+		}
+
+		System.out.println(game.hasPlayerWon() ? "YOU WON!" : "COMPUTER WON");
 		sc.close();
+
 	}
+
+	private int game() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
