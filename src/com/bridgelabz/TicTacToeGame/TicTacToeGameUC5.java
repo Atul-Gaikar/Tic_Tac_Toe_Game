@@ -3,7 +3,7 @@ package com.bridgelabz.TicTacToeGame;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class TicTacToeGameUC4 {
+public class TicTacToeGameUC5 {
 	private static final char EMPTY = ' ';
 	private static final char CROSS = 'X';
 	private static final char ROUND = 'O';
@@ -12,7 +12,7 @@ public class TicTacToeGameUC4 {
 	private char computerSymbol;
 	private char[] board;
 
-	TicTacToeGameUC4() {
+	TicTacToeGameUC5() {
 		board = new char[10];
 		Arrays.fill(board, EMPTY);
 
@@ -58,6 +58,7 @@ public class TicTacToeGameUC4 {
 		if (row > 3 || row < 1 || col > 3 || col < 1) {
 			System.out.println("Invalid move!");
 			return;
+			
 		}
 
 		if (isFree(row, col)) {
@@ -99,7 +100,7 @@ public class TicTacToeGameUC4 {
 	}
 
 	public static void main(String[] args) {
-		TicTacToeGameUC4 game = new TicTacToeGameUC4();
+		TicTacToeGameUC5 game = new TicTacToeGameUC5();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Choose a symbol (X or O): ");
 		String symbol = sc.next();
