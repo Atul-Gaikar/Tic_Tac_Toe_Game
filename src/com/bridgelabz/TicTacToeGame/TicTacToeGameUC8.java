@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-public class TicTacToeUC8 {
+public class TicTacToeGameUC8 {
 	private static final char EMPTY = ' ';
 	private static final char CROSS = 'X';
 	private static final char ROUND = 'O';
@@ -13,18 +13,18 @@ public class TicTacToeUC8 {
 	private char computerSymbol;
 	private char[] board;
 
-	TicTacToeUC8() {
+	TicTacToeGameUC8() {
 		board = new char[10];
 		Arrays.fill(board, EMPTY);
 
 	}
 
-	private TicTacToeUC8(char[] board) {
+	private TicTacToeGameUC8(char[] board) {
 		this.board = board;
 	}
 
-	public TicTacToeUC8 getCopy() {
-		return new TicTacToeUC8(this.board);
+	public TicTacToeGameUC8 getCopy() {
+		return new TicTacToeGameUC8(this.board);
 	}
 
 	public char getComputerSymbol() {
@@ -168,7 +168,7 @@ public class TicTacToeUC8 {
 	}
 
 	public int nextWinnigMovePosition(char[] board, char character) {
-		TicTacToeUC8 temp = this.getCopy();
+		TicTacToeGameUC8 temp = this.getCopy();
 
 		temp.choosePlayerSymbol(this.playerSymbol);
 		int winningPosition = -1;
@@ -194,7 +194,7 @@ public class TicTacToeUC8 {
 	}
 
 	public static void main(String[] args) {
-		TicTacToeUC8 game = new TicTacToeUC8();
+		TicTacToeGameUC8 game = new TicTacToeGameUC8();
 		Scanner sc = new Scanner(System.in);
 		int whoPlaysFirst = game.game();
 		System.out.println("Player symbol is: " + game.getPlayerSymbol());
